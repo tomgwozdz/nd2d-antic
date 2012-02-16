@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<project name="ND2D swc Builder" default="main" basedir="."> 
+    <taskdef resource="flexTasks.tasks" classpath="${basedir}/flexTasks/lib/flexTasks.jar" /> 
+    <property name="FLEX_HOME" value="C:/builder/flex-sdk-4.6"/> 
+    <property name="DEPLOY_DIR" value="."/> 
+    <property environment="env"/>
+
+    <target name="main"> 
+        <compc output="${DEPLOY_DIR}/nd2d.swc"> 
+			<include-sources dir="${basedir}/src" includes="*"/>
+            <source-path path-element="${basedir}/src"/> 
+        </compc> 
+    </target> 
+</project>
