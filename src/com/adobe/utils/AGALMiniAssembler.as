@@ -96,6 +96,7 @@ package com.adobe.utils {
 		// ======================================================================
 		//	Methods
 		// ----------------------------------------------------------------------
+		private var line:String = "";
 		public function assemble(mode:String, source:String):ByteArray {
 			var start:uint = getTimer();
 
@@ -122,7 +123,7 @@ package com.adobe.utils {
 			var lng:int = lines.length;
 
 			for(i = 0; i < lng && _error == ""; i++) {
-				var line:String = new String(lines[i]);
+				line = lines[i];
 				line = line.replace(REGEXP_OUTER_SPACES, "");
 
 				// remove comments

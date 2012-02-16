@@ -143,6 +143,7 @@ package de.nulldesign.nd2d.display {
 		 * @private
 		 */
 		public var localModelMatrix:Matrix3D = new Matrix3D();
+		public var overrideLocalModelMatrix:Matrix3D = null;
 
 		/**
 		 * @private
@@ -470,12 +471,23 @@ package de.nulldesign.nd2d.display {
 		 */
 		public function updateLocalMatrix():void {
 			invalidateMatrix = false;
-			localModelMatrix.identity();
-			localModelMatrix.appendTranslation(-_pivot.x, -_pivot.y, 0);
-			localModelMatrix.appendScale(_scaleX, _scaleY, 1.0);
-			localModelMatrix.appendRotation(_rotationZ, Vector3D.Z_AXIS);
-			localModelMatrix.appendRotation(_rotationY, Vector3D.Y_AXIS);
-			localModelMatrix.appendRotation(_rotationX, Vector3D.X_AXIS);
+			
+			if (overrideLocalModelMatrix != null)
+			{
+				localModelMatrix.identity();
+				localModelMatrix.appendTranslation(-_pivot.x, -_pivot.y, 0);
+				localModelMatrix.append(overrideLocalModelMatrix);
+			}
+			else
+			{
+				localModelMatrix.identity();
+				localModelMatrix.appendTranslation(-_pivot.x, -_pivot.y, 0);
+				localModelMatrix.appendScale(_scaleX, _scaleY, 1.0);
+				localModelMatrix.appendRotation(_rotationZ, Vector3D.Z_AXIS);
+				localModelMatrix.appendRotation(_rotationY, Vector3D.Y_AXIS);
+				localModelMatrix.appendRotation(_rotationX, Vector3D.X_AXIS);
+			}
+			
 			localModelMatrix.appendTranslation(_x, _y, _z);
 		}
 
@@ -635,7 +647,7 @@ package de.nulldesign.nd2d.display {
 
 			this.timeSinceStartInSeconds = timeSinceStartInSeconds;
 
-			step(elapsed);
+			//step(elapsed); // this is a completely useless call
 
 			for each(var child:Node2D in children) {
 				child.stepNode(elapsed, timeSinceStartInSeconds);
@@ -674,7 +686,7 @@ package de.nulldesign.nd2d.display {
 				myMatrixChanged = true;
 			}
 
-			draw(context, camera);
+			//draw(context, camera); // this is a completely useless call
 			statsObject.totalDrawCalls += drawCalls;
 			statsObject.totalTris += numTris;
 

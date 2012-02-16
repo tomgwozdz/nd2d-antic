@@ -36,7 +36,7 @@ package de.nulldesign.nd2d.materials {
 	import de.nulldesign.nd2d.geom.UV;
 	import de.nulldesign.nd2d.geom.Vertex;
 	import de.nulldesign.nd2d.materials.shader.ShaderCache;
-
+	
 	import flash.display3D.Context3D;
 	import flash.display3D.Context3DProgramType;
 	import flash.display3D.Context3DVertexBufferFormat;
@@ -140,14 +140,15 @@ package de.nulldesign.nd2d.materials {
 			clearAfterRender(context);
 		}
 
+		private var colorMultiplierAndOffset:Vector.<Number> = new Vector.<Number>(8, true);
+		private var uvoffset:Vector.<Number> = new Vector.<Number>(4, true);
+		private var child:Sprite2D;
+		private static const OFFSET_FACTOR:Number = 1.0 / 255.0;
+		private var uvOffsetAndScale:Rectangle;
 		protected function processAndRenderNodes(context:Context3D, childList:Vector.<Node2D>):void {
-
-			var child:Sprite2D;
-			const colorMultiplierAndOffset:Vector.<Number> = new Vector.<Number>(8, true);
-			const uvoffset:Vector.<Number> = new Vector.<Number>(4, true);
+			
 			var i:int = -1;
 			const n:int = childList.length;
-			const offsetFactor:Number = 1.0 / 255.0;
 
 			while(++i < n) {
 
@@ -161,8 +162,6 @@ package de.nulldesign.nd2d.materials {
 					// TODO check if parent matrix changed?
 					child.updateWorldMatrix();
 
-					var uvOffsetAndScale:Rectangle = new Rectangle(0.0, 0.0, 1.0, 1.0);
-
 					if(spriteSheet) {
 
 						uvOffsetAndScale = child.spriteSheet.getUVRectForFrame(texture.textureWidth, texture.textureHeight);
@@ -170,7 +169,7 @@ package de.nulldesign.nd2d.materials {
 						var offset:Point = child.spriteSheet.getOffsetForFrame();
 
 						clipSpaceMatrix.identity();
-						clipSpaceMatrix.appendScale(child.spriteSheet.spriteWidth >> 1, child.spriteSheet.spriteHeight >> 1, 1.0);
+						clipSpaceMatrix.appendScale(child.spriteSheet.spriteWidth >> 1, Math.max(1, child.spriteSheet.spriteHeight >> 1), 1.0);
 						clipSpaceMatrix.appendTranslation(offset.x, offset.y, 0.0);
 						clipSpaceMatrix.append(child.worldModelMatrix);
 						clipSpaceMatrix.append(viewProjectionMatrix);
@@ -186,10 +185,10 @@ package de.nulldesign.nd2d.materials {
 					colorMultiplierAndOffset[1] = child.combinedColorTransform.greenMultiplier;
 					colorMultiplierAndOffset[2] = child.combinedColorTransform.blueMultiplier;
 					colorMultiplierAndOffset[3] = child.combinedColorTransform.alphaMultiplier;
-					colorMultiplierAndOffset[4] = child.combinedColorTransform.redOffset * offsetFactor;
-					colorMultiplierAndOffset[5] = child.combinedColorTransform.greenOffset * offsetFactor;
-					colorMultiplierAndOffset[6] = child.combinedColorTransform.blueOffset * offsetFactor;
-					colorMultiplierAndOffset[7] = child.combinedColorTransform.alphaOffset * offsetFactor;
+					colorMultiplierAndOffset[4] = child.combinedColorTransform.redOffset * OFFSET_FACTOR;
+					colorMultiplierAndOffset[5] = child.combinedColorTransform.greenOffset * OFFSET_FACTOR;
+					colorMultiplierAndOffset[6] = child.combinedColorTransform.blueOffset * OFFSET_FACTOR;
+					colorMultiplierAndOffset[7] = child.combinedColorTransform.alphaOffset * OFFSET_FACTOR;
 
 					uvoffset[0] = uvOffsetAndScale.x;
 					uvoffset[1] = uvOffsetAndScale.y;

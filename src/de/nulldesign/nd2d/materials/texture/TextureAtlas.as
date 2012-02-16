@@ -33,15 +33,18 @@ package de.nulldesign.nd2d.materials.texture {
 	import de.nulldesign.nd2d.materials.texture.parser.ATextureAtlasParser;
 	import de.nulldesign.nd2d.materials.texture.parser.TexturePackerParser;
 	import de.nulldesign.nd2d.materials.texture.parser.ZwopTexParser;
-
+	
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
+	import flash.utils.Dictionary;
 
 	public class TextureAtlas extends ASpriteSheetBase {
 
 		public static const XML_FORMAT_COCOS2D:String = "xmlFormatCocos2D";
 		public static const XML_FORMAT_ZWOPTEX:String = "xmlFormatZwoptex";
 
+		protected var animNames:Array = new Array();
+		
 		/**
 		 *
 		 * @param sheetWidth
@@ -58,6 +61,7 @@ package de.nulldesign.nd2d.materials.texture {
 
 			if(xmlData) {
 				parse(xmlData, xmlFormat);
+				BuildAnimations();
 			}
 		}
 
@@ -120,5 +124,77 @@ package de.nulldesign.nd2d.materials.texture {
 
 			return t;
 		}
+		
+		public function GetSourceSizeForFrame(frame:int):Point
+		{
+			return new Point(frames[frame].width, frames[frame].height);
+		}
+		
+		public function get AnimNames():Array
+		{
+			return animNames;
+		}
+		
+		public function GetFrameIndexFromFrameName(frameName:String):int
+		{
+			return frameNameToIndex[frameName];
+		}
+		
+		public function GetFrameNameToIndexDictionary():Dictionary
+		{
+			return frameNameToIndex;
+		}
+		
+		public function GetOffsetForFrame(frameIndex:int):Point {
+			return offsets[frameIndex];
+		}
+		
+		// build up all animations based on frame names
+		public function BuildAnimations():void
+		{
+			var frameNames:Array = frameNames
+			var prevAnimName:String = "";
+			var animFrames:Array;
+			
+			animNames = new Array();
+			for each (var frameName:String in frameNames)
+			{				
+				// the animation name is everything except the last underscore, the frame number, and the file extension
+				var position:int = frameName.lastIndexOf("_");
+				var animName:String = frameName.substr(0, position);
+				
+				// get the frame number (right before the "." in the file extension
+				var dotPosition:int = frameName.lastIndexOf(".");
+				var frameNumber:int = parseInt(frameName.substr(position + 1, dotPosition - position - 1));
+				
+				if (animName != prevAnimName)
+				{
+					if (animFrames && animFrames.length > 0)
+					{
+						trace("==> Creating animation " + prevAnimName + " with " + animFrames.length + " frames");
+						addAnimation(prevAnimName, animFrames, true);
+						animNames.push(prevAnimName);
+					}
+					
+					animFrames = new Array();
+					prevAnimName = animName;
+				}
+				
+				animFrames.push(frameName);	// stores all of the frames for one animation
+				
+				//trace("Frame name: " + frameName + " Animation Name: " + animName + " Frame Number: " + frameNumber);
+				
+				//var pieces:Array = frameName.split(/[^0-9-]+/);	// split into pieces based on 
+				//frames.push(new Rectangle(array[1], array[2], array[3], array[4]));
+			}
+			
+			// add the last animation :)
+			if (animFrames && animFrames.length > 0)
+			{
+				trace("==> Creating animation " + prevAnimName + " with " + animFrames.length + " frames");
+				addAnimation(prevAnimName, animFrames, true);
+				animNames.push(prevAnimName);
+			}
+		}		
 	}
 }

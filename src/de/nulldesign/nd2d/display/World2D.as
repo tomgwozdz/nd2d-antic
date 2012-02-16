@@ -329,6 +329,9 @@ package de.nulldesign.nd2d.display {
 			stage.removeEventListener(TouchEvent.TOUCH_MOVE, touchEventHandler);
 			stage.removeEventListener(TouchEvent.TOUCH_END, touchEventHandler);
 
+			ShaderCache.getInstance().handleDeviceLoss();
+			scene.handleDeviceLoss();
+			
 			if(context3D) {
 				context3D.dispose();
 			}
