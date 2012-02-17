@@ -647,7 +647,7 @@ package de.nulldesign.nd2d.display {
 
 			this.timeSinceStartInSeconds = timeSinceStartInSeconds;
 
-			//step(elapsed); // this is a completely useless call
+			step(elapsed);
 
 			for each(var child:Node2D in children) {
 				child.stepNode(elapsed, timeSinceStartInSeconds);
@@ -686,7 +686,7 @@ package de.nulldesign.nd2d.display {
 				myMatrixChanged = true;
 			}
 
-			//draw(context, camera); // this is a completely useless call
+			draw(context, camera);
 			statsObject.totalDrawCalls += drawCalls;
 			statsObject.totalTris += numTris;
 
