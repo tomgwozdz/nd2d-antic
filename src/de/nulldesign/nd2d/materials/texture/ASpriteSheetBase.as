@@ -32,15 +32,16 @@ package de.nulldesign.nd2d.materials.texture {
 
 	import de.nulldesign.nd2d.events.SpriteSheetAnimationEvent;
 	import de.nulldesign.nd2d.materials.texture.SpriteSheetAnimation;
-
+	
 	import flash.events.EventDispatcher;
-
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	import flash.utils.Dictionary;
 
 	public class ASpriteSheetBase extends EventDispatcher {
 
+		public static const FRAME_NOT_FOUND:uint = 0xFFFFFFFF;
+		
 		internal var frames:Vector.<Rectangle> = new Vector.<Rectangle>();
 		internal var offsets:Vector.<Point> = new Vector.<Point>();
 		internal var frameNameToIndex:Dictionary = new Dictionary();
@@ -66,6 +67,8 @@ package de.nulldesign.nd2d.materials.texture {
 		public var spriteHeight:Number;
 		protected var _sheetWidth:Number;
 		protected var _sheetHeight:Number;
+		
+		protected var frameSizeMap:Dictionary = new Dictionary();
 
 		protected var _frame:uint = int.MAX_VALUE;
 
@@ -146,8 +149,31 @@ package de.nulldesign.nd2d.materials.texture {
 		public function getDimensionForFrame():Rectangle {
 			return frames[frame];
 		}
+		
+		public function getDimensionsForName(name:String):Rectangle
+		{
+			var index:uint = getIndexForFrame(name);
+			if(index != FRAME_NOT_FOUND)
+			{
+				return frames[index];
+			}
+			return null;
+		}
+		
+		public function getSourceSizeForFrame(frame:int):Point
+		{
+			if(!frameSizeMap.hasOwnProperty(frame))
+			{
+				frameSizeMap[frame] = new Point(frames[frame].width, frames[frame].height);
+			}
+			return frameSizeMap[frame];
+		}
 
 		public function getIndexForFrame(name:String):uint {
+			if(!frameNameToIndex.hasOwnProperty(name))
+			{
+				return FRAME_NOT_FOUND;
+			}
 			return frameNameToIndex[name];
 		}
 

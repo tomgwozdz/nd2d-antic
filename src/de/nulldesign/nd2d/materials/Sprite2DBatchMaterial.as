@@ -169,7 +169,7 @@ package de.nulldesign.nd2d.materials {
 						var offset:Point = child.spriteSheet.getOffsetForFrame();
 
 						clipSpaceMatrix.identity();
-						clipSpaceMatrix.appendScale(child.spriteSheet.spriteWidth >> 1, child.spriteSheet.spriteHeight >> 1, 1.0);
+						clipSpaceMatrix.appendScale((child.spriteSheet.spriteWidth > 1) ? child.spriteSheet.spriteWidth >> 1 : 1, (child.spriteSheet.spriteHeight > 1) ? child.spriteSheet.spriteHeight >> 1 : 1, 1.0);
 						clipSpaceMatrix.appendTranslation(offset.x, offset.y, 0.0);
 						clipSpaceMatrix.append(child.worldModelMatrix);
 						clipSpaceMatrix.append(viewProjectionMatrix);
