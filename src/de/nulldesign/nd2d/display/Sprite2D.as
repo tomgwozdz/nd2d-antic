@@ -32,12 +32,12 @@ package de.nulldesign.nd2d.display {
 
 	import de.nulldesign.nd2d.geom.Face;
 	import de.nulldesign.nd2d.materials.BlendModePresets;
-	import de.nulldesign.nd2d.materials.texture.ASpriteSheetBase;
 	import de.nulldesign.nd2d.materials.Sprite2DMaskMaterial;
 	import de.nulldesign.nd2d.materials.Sprite2DMaterial;
+	import de.nulldesign.nd2d.materials.texture.ASpriteSheetBase;
 	import de.nulldesign.nd2d.materials.texture.Texture2D;
 	import de.nulldesign.nd2d.utils.TextureHelper;
-
+	
 	import flash.display.BitmapData;
 	import flash.display3D.Context3D;
 	import flash.geom.Rectangle;
