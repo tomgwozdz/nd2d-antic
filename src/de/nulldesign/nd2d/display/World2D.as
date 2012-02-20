@@ -95,7 +95,8 @@ package de.nulldesign.nd2d.display {
 		internal var topMostMouseNode:Node2D;
 
 		public static var isHardwareAccelerated:Boolean;
-
+		public static var driverString:String;
+		
 		/**
 		 * Constructor of class world
 		 * @param renderMode Context3DRenderMode (auto, software)
@@ -143,6 +144,7 @@ package de.nulldesign.nd2d.display {
 			context3D.setCulling(Context3DTriangleFace.NONE);
 			context3D.setDepthTest(false, Context3DCompareMode.ALWAYS);
 			isHardwareAccelerated = context3D.driverInfo.toLowerCase().indexOf("software") == -1;
+			driverString = context3D.driverInfo;
 
 			resizeStage();
 
