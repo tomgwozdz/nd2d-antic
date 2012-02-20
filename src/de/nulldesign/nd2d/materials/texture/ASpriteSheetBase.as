@@ -210,5 +210,20 @@ package de.nulldesign.nd2d.materials.texture {
 
 			return rect;
 		}
+		
+		public function getFrameRect(frame:uint):Rectangle
+		{
+			return frames[frame];
+		}
+		
+		public function getActiveAnimation():SpriteSheetAnimation
+		{
+			return activeAnimation;
+		}
+		
+		public function get FrameNameToIndexDictionary():Dictionary
+		{
+			return frameNameToIndex;
+		}
 	}
 }
