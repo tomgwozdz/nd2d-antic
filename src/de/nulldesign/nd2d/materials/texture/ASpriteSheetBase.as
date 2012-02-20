@@ -62,18 +62,10 @@ package de.nulldesign.nd2d.materials.texture {
 
 		protected var fps:uint;
 
-		protected var _spriteWidth:Number;
-		protected var _spriteHeight:Number;
+		public var spriteWidth:Number;
+		public var spriteHeight:Number;
 		protected var _sheetWidth:Number;
 		protected var _sheetHeight:Number;
-
-		public function get spriteWidth():Number {
-			return _spriteWidth;
-		}
-
-		public function get spriteHeight():Number {
-			return _spriteHeight;
-		}
 
 		protected var _frame:uint = int.MAX_VALUE;
 
@@ -87,8 +79,8 @@ package de.nulldesign.nd2d.materials.texture {
 				frameUpdated = true;
 
 				if(frames.length - 1 >= _frame) {
-					_spriteWidth = frames[_frame].width;
-					_spriteHeight = frames[_frame].height;
+					spriteWidth = frames[_frame].width;
+					spriteHeight = frames[_frame].height;
 				}
 			}
 		}
