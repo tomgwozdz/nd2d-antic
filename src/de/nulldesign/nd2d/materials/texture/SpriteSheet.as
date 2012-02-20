@@ -46,12 +46,12 @@ package de.nulldesign.nd2d.materials.texture {
 		 * @param fps
 		 * @param spritesPackedWithoutSpace set to true to get rid of pixel bleeding for packed sprites without spaces: http://www.nulldesign.de/2011/08/30/nd2d-pixel-bleeding/
 		 */
-		public function SpriteSheet(sheetWidth:Number, sheetHeight:Number, spriteWidth:Number, spriteHeight:Number, fps:uint, spritesPackedWithoutSpace:Boolean = false) {
+		public function SpriteSheet(sheetWidth:Number, sheetHeight:Number, tempSpriteWidth:Number, tempSpriteHeight:Number, fps:uint, spritesPackedWithoutSpace:Boolean = false) {
 			this.fps = fps;
 			this.spritesPackedWithoutSpace = spritesPackedWithoutSpace;
 
-			spriteWidth = spriteWidth;
-			spriteHeight = spriteHeight;
+			spriteWidth = tempSpriteWidth;
+			spriteHeight = tempSpriteHeight;
 			_sheetWidth = sheetWidth;
 			_sheetHeight = sheetHeight;
 
