@@ -63,20 +63,12 @@ package de.nulldesign.nd2d.materials.texture {
 
 		protected var fps:uint;
 
-		protected var _spriteWidth:Number;
-		protected var _spriteHeight:Number;
+		public var spriteWidth:Number;
+		public var spriteHeight:Number;
 		protected var _sheetWidth:Number;
 		protected var _sheetHeight:Number;
 		
 		protected var frameSizeMap:Dictionary = new Dictionary();
-
-		public function get spriteWidth():Number {
-			return _spriteWidth;
-		}
-
-		public function get spriteHeight():Number {
-			return _spriteHeight;
-		}
 
 		protected var _frame:uint = int.MAX_VALUE;
 
@@ -90,8 +82,8 @@ package de.nulldesign.nd2d.materials.texture {
 				frameUpdated = true;
 
 				if(frames.length - 1 >= _frame) {
-					_spriteWidth = frames[_frame].width;
-					_spriteHeight = frames[_frame].height;
+					spriteWidth = frames[_frame].width;
+					spriteHeight = frames[_frame].height;
 				}
 			}
 		}
@@ -217,6 +209,21 @@ package de.nulldesign.nd2d.materials.texture {
 			uvRects[frame] = rect;
 
 			return rect;
+		}
+		
+		public function getFrameRect(frame:uint):Rectangle
+		{
+			return frames[frame];
+		}
+		
+		public function getActiveAnimation():SpriteSheetAnimation
+		{
+			return activeAnimation;
+		}
+		
+		public function get FrameNameToIndexDictionary():Dictionary
+		{
+			return frameNameToIndex;
 		}
 	}
 }

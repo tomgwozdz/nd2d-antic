@@ -46,12 +46,12 @@ package de.nulldesign.nd2d.materials.texture {
 		 * @param fps
 		 * @param spritesPackedWithoutSpace set to true to get rid of pixel bleeding for packed sprites without spaces: http://www.nulldesign.de/2011/08/30/nd2d-pixel-bleeding/
 		 */
-		public function SpriteSheet(sheetWidth:Number, sheetHeight:Number, spriteWidth:Number, spriteHeight:Number, fps:uint, spritesPackedWithoutSpace:Boolean = false) {
+		public function SpriteSheet(sheetWidth:Number, sheetHeight:Number, tempSpriteWidth:Number, tempSpriteHeight:Number, fps:uint, spritesPackedWithoutSpace:Boolean = false) {
 			this.fps = fps;
 			this.spritesPackedWithoutSpace = spritesPackedWithoutSpace;
 
-			_spriteWidth = spriteWidth;
-			_spriteHeight = spriteHeight;
+			spriteWidth = tempSpriteWidth;
+			spriteHeight = tempSpriteHeight;
 			_sheetWidth = sheetWidth;
 			_sheetHeight = sheetHeight;
 
@@ -75,8 +75,8 @@ package de.nulldesign.nd2d.materials.texture {
 
 				frames.push(new Rectangle((spriteWidth * rowIdx),
 						(spriteHeight * colIdx),
-						_spriteWidth,
-						_spriteHeight));
+						spriteWidth,
+						spriteHeight));
 			}
 
 			frame = 0;
@@ -92,7 +92,7 @@ package de.nulldesign.nd2d.materials.texture {
 
 		override public function clone():ASpriteSheetBase {
 
-			var s:SpriteSheet = new SpriteSheet(_sheetWidth, _sheetHeight, _spriteWidth, _spriteHeight, fps, spritesPackedWithoutSpace);
+			var s:SpriteSheet = new SpriteSheet(_sheetWidth, _sheetHeight, spriteWidth, spriteHeight, fps, spritesPackedWithoutSpace);
 
 			for(var name:String in animationMap) {
 				var anim:SpriteSheetAnimation = animationMap[name];
