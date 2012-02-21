@@ -477,6 +477,7 @@ package de.nulldesign.nd2d.display {
 				localModelMatrix.identity();
 				localModelMatrix.appendTranslation(-_pivot.x, -_pivot.y, 0);
 				localModelMatrix.append(overrideLocalModelMatrix);
+				localModelMatrix.appendScale(_scaleX, _scaleY, 1.0);
 			}
 			else
 			{
