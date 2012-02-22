@@ -225,5 +225,10 @@ package de.nulldesign.nd2d.materials.texture {
 		{
 			return frameNameToIndex;
 		}
+		
+		public function get numFrames():uint
+		{
+			return frames.length;
+		}
 	}
 }
