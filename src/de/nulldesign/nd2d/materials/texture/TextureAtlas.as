@@ -105,6 +105,7 @@ package de.nulldesign.nd2d.materials.texture {
 			frameNameToIndex = parser.frameNameToIndex;
 			frames = parser.frames;
 			offsets = parser.offsets;
+			sourceSizes = parser.originalSizes;
 
 			uvRects = new Vector.<Rectangle>(frames.length, true);
 			frame = 0;
@@ -118,6 +119,7 @@ package de.nulldesign.nd2d.materials.texture {
 			t.activeAnimation = activeAnimation;
 			t.frames = frames;
 			t.offsets = offsets;
+			t.sourceSizes = sourceSizes;
 			t.frameNameToIndex = frameNameToIndex;
 			t.uvRects = uvRects;
 			t.frame = frame;
@@ -127,6 +129,10 @@ package de.nulldesign.nd2d.materials.texture {
 		
 		public function GetSourceSizeForFrame(frame:int):Point
 		{
+			if(sourceSizes.hasOwnProperty(frame))
+			{
+				return sourceSizes[frame];	
+			}
 			return new Point(frames[frame].width, frames[frame].height);
 		}
 		

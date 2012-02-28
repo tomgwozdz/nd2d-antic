@@ -113,17 +113,18 @@ package de.nulldesign.nd2d.materials.texture.parser {
 										}
 									}
 										break;
-									/*
-									 case "sourceSize":
-									 {
-									 if(type == "string") {
-									 array = data.split(/[^0-9-]+/);
-									 sourceSizes.push(new Point(array[1], array[2]));
-									 } else {
-									 throw new Error("Error parsing descriptor format");
-									 }
-									 }
+									
+									case "sourceSize":
+									{
+										if(type == "string") {
+											array = data.split(/[^0-9-]+/);
+											sourceSizes.push(new Point(array[1], array[2]));
+										} else {
+											throw new Error("Error parsing descriptor format");
+										}
+									}
 									 break;
+									 /*
 									 case "sourceColorRect":
 									 {
 									 if(type == "string") {

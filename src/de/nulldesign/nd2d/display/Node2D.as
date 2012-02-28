@@ -33,7 +33,7 @@ package de.nulldesign.nd2d.display {
 	import de.nulldesign.nd2d.materials.BlendModePresets;
 	import de.nulldesign.nd2d.utils.NodeBlendMode;
 	import de.nulldesign.nd2d.utils.StatsObject;
-
+	
 	import flash.display.Stage;
 	import flash.display3D.Context3D;
 	import flash.events.Event;
@@ -478,6 +478,7 @@ package de.nulldesign.nd2d.display {
 				localModelMatrix.appendTranslation(-_pivot.x, -_pivot.y, 0);
 				localModelMatrix.append(overrideLocalModelMatrix);
 				localModelMatrix.appendScale(_scaleX, _scaleY, 1.0);
+				localModelMatrix.appendRotation(_rotationZ, Vector3D.Z_AXIS);
 			}
 			else
 			{

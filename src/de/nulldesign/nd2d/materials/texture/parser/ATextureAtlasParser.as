@@ -38,6 +38,7 @@ package de.nulldesign.nd2d.materials.texture.parser {
 
 		protected var framesList:Vector.<Rectangle> = new Vector.<Rectangle>();
 		protected var offsetList:Vector.<Point> = new Vector.<Point>();
+		protected var sourceSizes:Vector.<Point> = new Vector.<Point>();
 		protected var frameNameToIndexMap:Dictionary = new Dictionary();
 
 		public function ATextureAtlasParser() {
@@ -87,6 +88,11 @@ package de.nulldesign.nd2d.materials.texture.parser {
 
 		public function get frameNameToIndex():Dictionary {
 			return frameNameToIndexMap;
+		}
+		
+		public function get originalSizes():Vector.<Point>
+		{
+			return sourceSizes;
 		}
 
 		public function parse(data:XML):void {
