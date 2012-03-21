@@ -124,6 +124,9 @@ package de.nulldesign.nd2d.utils {
 				texture.uploadFromBitmapData(newBmp);
 				//texture.uploadFromByteArray(data, 0);
 			}
+			
+			newBmp.dispose();
+			newBmp = null;
 
 			return texture;
 		}

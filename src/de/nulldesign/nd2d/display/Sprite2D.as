@@ -186,7 +186,10 @@ package de.nulldesign.nd2d.display {
 				material.handleDeviceLoss();
 
 			if (texture)
+			{
+				texture.dispose();
 				texture.texture = null;
+			}
 		}
 
 
