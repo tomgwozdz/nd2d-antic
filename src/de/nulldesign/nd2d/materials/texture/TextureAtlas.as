@@ -106,6 +106,7 @@ package de.nulldesign.nd2d.materials.texture {
 			frames = parser.frames;
 			offsets = parser.offsets;
 			sourceSizes = parser.originalSizes;
+			sourceColorRects = parser.SourceColorRects;
 
 			uvRects = new Vector.<Rectangle>(frames.length, true);
 			frame = 0;

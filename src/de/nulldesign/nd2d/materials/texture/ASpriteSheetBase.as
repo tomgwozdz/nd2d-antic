@@ -45,6 +45,7 @@ package de.nulldesign.nd2d.materials.texture {
 		internal var frames:Vector.<Rectangle> = new Vector.<Rectangle>();
 		internal var offsets:Vector.<Point> = new Vector.<Point>();
 		internal var sourceSizes:Vector.<Point> = new Vector.<Point>();
+		internal var sourceColorRects:Vector.<Rectangle> = new Vector.<Rectangle>();
 		internal var frameNameToIndex:Dictionary = new Dictionary();
 		internal var uvRects:Vector.<Rectangle>;
 		internal var animationMap:Dictionary = new Dictionary();
@@ -235,6 +236,10 @@ package de.nulldesign.nd2d.materials.texture {
 		public function get originalSizes():Vector.<Point>
 		{
 			return sourceSizes;
+		}
+		public function get SourceColorRects():Vector.<Rectangle>
+		{
+			return sourceColorRects;
 		}
 	}
 }
