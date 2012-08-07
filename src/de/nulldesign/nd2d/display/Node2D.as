@@ -651,8 +651,11 @@ package de.nulldesign.nd2d.display {
 
 			step(elapsed);
 
-			for each(var child:Node2D in children) {
-				child.stepNode(elapsed, timeSinceStartInSeconds);
+			if(children && children.length > 0)
+			{
+				for each(var child:Node2D in children) {
+					child.stepNode(elapsed, timeSinceStartInSeconds);
+				}
 			}
 		}
 

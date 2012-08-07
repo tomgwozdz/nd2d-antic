@@ -130,7 +130,10 @@ package de.nulldesign.nd2d.materials {
 			generateBufferData(context, faceList);
 			prepareForRender(context);
 
-			processAndRenderNodes(context, childList);
+			if(childList.length > 0)
+			{
+				processAndRenderNodes(context, childList);
+			}
 
 			if(batchLen != 0) {
 				context.drawTriangles(indexBuffer, 0, batchLen * 2);
@@ -216,7 +219,10 @@ package de.nulldesign.nd2d.materials {
 						++drawCalls;
 					}
 
-					processAndRenderNodes(context, child.children);
+					if(child.children.length > 0)
+					{
+						processAndRenderNodes(context, child.children);
+					}
 				}
 			}
 		}
